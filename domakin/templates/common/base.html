@@ -1,0 +1,16 @@
+{% load static compress tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Domakin</title>
+        {% compress css %}
+            {% tailwind_css %}
+        {% endcompress %}
+    </head>
+    <body>
+        {% block content %}
+        {% endblock content %}
+    </body>
+</html>
