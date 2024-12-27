@@ -8,6 +8,11 @@ UserModel = get_user_model()
 
 
 class UserRegisterForm(SignupForm):
+    name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={"class": "input input-bordered", "placeholder": "Име"}
+        )
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

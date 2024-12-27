@@ -123,11 +123,6 @@ MEDIA_URL = "/media/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-# Custom User Model
-
-AUTH_USER_MODEL = "users.CustomUser"
-
-
 # Compressor
 
 COMPRESS_ROOT = BASE_DIR / "static"
@@ -147,6 +142,10 @@ TAILWIND_APP_NAME = "theme"
 
 
 # Auth
+
+AUTH_USER_MODEL = "users.CustomUser"
+
+SITE_ID = 1
 
 LOGIN_REDIRECT_URL = "/"
 
@@ -189,8 +188,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-
-SITE_ID = 1
+SOCIALACCOUNT_ADAPTER = "users.adapters.CustomSocialAccountAdapter"
 
 
 # Email
