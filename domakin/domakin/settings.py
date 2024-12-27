@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     # Project
     "users",
     "common",
+    "families",
 ]
 
 MIDDLEWARE = [
@@ -160,6 +161,8 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+
+ACCOUNT_LOGOUT_ON_GET = True
 
 SOCIALACCOUNT_EMAIL_REQUIRED = True
 
