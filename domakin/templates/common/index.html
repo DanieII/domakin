@@ -1,5 +1,12 @@
 {% extends "common/base.html" %}
 {% block content %}
-    <p class="uppercase">Welcome</p>
-    <button class="btn">Hey</button>
+    <div class="hero bg-base-200 min-h-screen">
+        <div class="hero-content text-center">
+            <div class="max-w-md">
+                <h1 class="text-6xl font-bold">Domakin</h1>
+                <p class="py-6 text-lg">Сближете семейството си, като превърнете ежедневните си задачи в игра.</p>
+                <a class="btn btn-primary text-lg" href="{% url 'account_login' %}">Започни</a>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

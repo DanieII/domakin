@@ -1,0 +1,16 @@
+{% if form.non_field_errors %}
+    <div class="text-primary-content text-center mb-2">{{ form.non_field_errors }}</div>
+{% endif %}
+{% for field in form %}
+    <div class="flex flex-col w-full">
+        {% if field.errors %}<div class="text-primary-content text-center mb-2">{{ field.errors }}</div>{% endif %}
+        {% if field.field.widget.input_type == "checkbox" %}
+            <div class="flex items-center gap-2">
+                {{ field.label_tag }}
+                {{ field }}
+            </div>
+        {% else %}
+            {{ field }}
+        {% endif %}
+    </div>
+{% endfor %}
