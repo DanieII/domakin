@@ -1,4 +1,4 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render, reverse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView
 from .models import Family, FamilyInvitation, FamilyMember
@@ -41,3 +41,31 @@ class FamilyDetailView(LoginRequiredMixin, FamilyRequiredMixin, DetailView):
         user_family = self.request.user.familymember.family
 
         return user_family
+
+
+def create_family_invitation_view(request):
+    family = request.user.familymember.family
+    invitation = getattr(family, "familyinvitation", None)
+
+    if not invitation:
+        invitation = FamilyInvitation.objects.create(family=family)
+
+    invitation_link = request.build_absolute_uri(
+        reverse("accept_family_invitation", args=[invitation.id])
+    )
+
+    return render(
+        request,
+        "components/family_invitation.html",
+        {"invitation_link": invitation_link},
+    )
+
+
+def accept_family_invitation_view(request, invitation_id):
+    invitation = FamilyInvitation.objects.get(id=invitation_id)
+    family = invitation.family
+
+    FamilyMember.objects.create(user=request.user, family=family)
+    invitation.delete()
+
+    return redirect("dashboard")

@@ -1,4 +1,12 @@
 from django.contrib import admin
-from .models import Family
+from .models import Family, FamilyMember
 
-admin.site.register(Family)
+
+class FamilyMemberInline(admin.TabularInline):
+    model = FamilyMember
+
+
+@admin.register(Family)
+class FamilyAdmin(admin.ModelAdmin):
+    list_display = ["name", "created_at"]
+    inlines = [FamilyMemberInline]

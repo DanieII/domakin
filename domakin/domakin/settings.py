@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
+    "django_htmx",
     # Project
     "users",
     "common",
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     # Third Party
     "django_browser_reload.middleware.BrowserReloadMiddleware",
     "allauth.account.middleware.AccountMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
 ]
 
 ROOT_URLCONF = "domakin.urls"
@@ -192,6 +194,8 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 SOCIALACCOUNT_ADAPTER = "users.adapters.CustomSocialAccountAdapter"
+
+ACCOUNT_ADAPTER = "users.adapters.CustomAccountAdapter"
 
 
 # Email
