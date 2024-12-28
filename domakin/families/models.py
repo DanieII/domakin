@@ -21,3 +21,12 @@ class FamilyMember(models.Model):
 
     def __str__(self):
         return self.user.name
+
+
+class FamilyInvitation(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    family = models.OneToOneField(Family, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.family.name
