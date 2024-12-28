@@ -1,0 +1,10 @@
+services:
+  web:
+    container_name: domakin-web
+    build:
+      context: domakin
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./domakin:/app
+    tty: true
