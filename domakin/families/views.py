@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, reverse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView
@@ -43,7 +44,11 @@ class FamilyDetailView(LoginRequiredMixin, FamilyRequiredMixin, DetailView):
         return user_family
 
 
+@login_required
 def create_family_invitation_view(request):
+    if not hasattr(request.user, "familymember"):
+        return redirect(reverse("create_family"))
+
     family = request.user.familymember.family
     invitation = getattr(family, "familyinvitation", None)
 
@@ -61,7 +66,11 @@ def create_family_invitation_view(request):
     )
 
 
+@login_required
 def accept_family_invitation_view(request, invitation_id):
+    if hasattr(request.user, "familymember"):
+        return redirect(reverse("create_family"))
+
     invitation = FamilyInvitation.objects.get(id=invitation_id)
     family = invitation.family
 

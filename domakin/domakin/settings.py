@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "users",
     "common",
     "families",
+    "tasks",
 ]
 
 MIDDLEWARE = [
@@ -157,6 +158,8 @@ LOGOUT_REDIRECT_URL = "/"
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 
 ACCOUNT_EMAIL_REQUIRED = True
+
+ACCOUNT_EMAIL_VERIFICATION = "none"
 
 ACCOUNT_UNIQUE_EMAIL = True
 

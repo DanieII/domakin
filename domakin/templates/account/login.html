@@ -11,6 +11,7 @@
                 <form class="form-control gap-4" method="post">
                     {% csrf_token %}
                     {% include "common/form.html" with form=form %}
+                    <input type="hidden" name="next" value="{{ next }}" />
                     <button class="btn" type="submit">Изпрати</button>
                 </form>
                 <div class="divider">ИЛИ</div>
@@ -29,7 +30,8 @@
                 <a href="{% url 'account_reset_password' %}"
                    class="link text-center mt-4 ">Забравена парола?</a>
                 <p class="text-center">
-                    Нямате профил? <a class="link" href="{% url 'account_signup' %}">Регистрация</a>
+                    Нямате профил? <a class="link"
+    href="{% url 'account_signup' %}?next={{ request.GET.next|urlencode }}">Регистрация</a>
                 </p>
             </div>
         </div>

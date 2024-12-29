@@ -11,6 +11,7 @@
                 <form class="form-control gap-4" method="post">
                     {% csrf_token %}
                     {% include "common/form.html" with form=form %}
+                    <input type="hidden" name="next" value="{{ next }}" />
                     <button class="btn" type="submit">Изпрати</button>
                 </form>
                 <div class="divider">ИЛИ</div>
@@ -27,7 +28,8 @@
                     </svg>
                 Вход с Google</a>
                 <p class="text-center mt-4">
-                    Имате профил? <a class="link" href="{% url 'account_login' %}">Вход</a>
+                    Имате профил? <a class="link"
+    href="{% url 'account_login' %}?next={{ request.GET.next|urlencode }}">Вход</a>
                 </p>
             </div>
         </div>
