@@ -60,5 +60,5 @@ module.exports = {
     daisyui: {
         themes: ["cupcake"],
     },
-    safelist: ["input", "input-bordered"],
+    safelist: ["input", "input-bordered", "textarea", "textarea-bordered"],
 };

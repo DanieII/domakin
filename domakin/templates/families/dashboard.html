@@ -4,14 +4,14 @@
 {% endblock title %}
 {% block content %}
     <div class="container mx-auto p-2">
-        <h1 class="text-3xl text-center font-bold my-6">Семейство {{ family.name }}</h1>
-        <div class="bg-base-200 px-6 py-8 rounded-md flex flex-col">
-            <h2 class="text-2xl font-bold text-center">Членове на семейството</h2>
-            <div class="my-8 grid grid-cols-2 gap-4">
+        <h1 class="text-3xl text-center font-bold mb-6">Семейство {{ family.name }}</h1>
+        <div class="bg-base-200 px-6 py-8 rounded-md flex flex-col mb-6">
+            <h2 class="text-2xl font-bold text-center mb-4">Членове на семейството</h2>
+            <div class="grid grid-cols-2 gap-4 mb-2">
                 {% for member in family.familymember_set.all %}<p class="text-lg text-center font-bold">{{ member }}</p>{% endfor %}
             </div>
             <button class="btn btn-square btn-primary ml-auto btn-md"
-                    onclick="my_modal_5.showModal()"
+                    onclick="family_invitation_modal.showModal()"
                     hx-get="{% url "create_family_invitation" %}"
                     hx-target="#family_invitation"
                     hx-swap="innerHTML">
@@ -26,7 +26,8 @@
                     <path strokeLinecap="round" strokeLinejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
                 </svg>
             </button>
-            <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+            <dialog id="family_invitation_modal"
+                    class="modal modal-bottom sm:modal-middle">
                 <div class="modal-box">
                     <div id="family_invitation">Моля изчакайте.</div>
                     <div class="modal-action">
@@ -36,6 +37,16 @@
                     </div>
                 </div>
             </dialog>
+        </div>
+        <div class="bg-base-200 px-6 py-8 rounded-md">
+            <h2 class="text-2xl font-bold text-center mb-4">Задачи</h2>
+            <div id="tasks"
+                 hx-get="{% url 'tasks' %}"
+                 hx-trigger="load"
+                 hx-target="#tasks"
+                 hx-swap="innerHTML">
+                <span class="loading loading-spinner loading-lg"></span>
+            </div>
         </div>
     </div>
 {% endblock content %}

@@ -179,8 +179,10 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 ACCOUNT_FORMS = {
-    "login": "users.forms.UserLoginForm",
-    "signup": "users.forms.UserRegisterForm",
+    "login": "users.forms.CustomLoginForm",
+    "signup": "users.forms.CustomRegisterForm",
+    "reset_password": "users.forms.CustomResetPasswordForm",
+    "reset_password_from_key": "users.forms.CustomResetPasswordKeyForm",
 }
 
 SOCIALACCOUNT_PROVIDERS = {

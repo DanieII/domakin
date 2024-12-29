@@ -24,13 +24,13 @@ class FamilyCreateView(LoginRequiredMixin, NotInFamilyRequiredMixin, CreateView)
         return form
 
     def form_valid(self, form):
-        family = form.save()
+        self.object = form.save()
 
         FamilyMember.objects.create(
-            user=self.request.user, family=family, is_admin=True
+            user=self.request.user, family=self.object, is_admin=True
         )
 
-        return super().form_valid(form)
+        return redirect(self.get_success_url())
 
 
 class FamilyDetailView(LoginRequiredMixin, FamilyRequiredMixin, DetailView):

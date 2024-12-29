@@ -1,13 +1,17 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UsernameField
-
-from allauth.account.forms import SignupForm, LoginForm
+from allauth.account.forms import (
+    SignupForm,
+    LoginForm,
+    ResetPasswordForm,
+    ResetPasswordKeyForm,
+)
 
 UserModel = get_user_model()
 
 
-class UserRegisterForm(SignupForm):
+class CustomRegisterForm(SignupForm):
     name = forms.CharField(
         widget=forms.TextInput(
             attrs={"class": "input input-bordered", "placeholder": "Име"}
@@ -48,7 +52,7 @@ class UserRegisterForm(SignupForm):
         )
 
 
-class UserLoginForm(LoginForm):
+class CustomLoginForm(LoginForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -76,4 +80,44 @@ class UserLoginForm(LoginForm):
             label="Запомни ме",
             required=False,
             widget=forms.CheckboxInput(attrs={"class": "checkbox"}),
+        )
+
+
+class CustomResetPasswordForm(ResetPasswordForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["email"] = forms.EmailField(
+            widget=forms.EmailInput(
+                attrs={
+                    "autofocus": True,
+                    "class": "input input-bordered",
+                    "placeholder": "Имейл",
+                    "type": "email",
+                }
+            )
+        )
+
+
+class CustomResetPasswordKeyForm(ResetPasswordKeyForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["password1"] = forms.CharField(
+            strip=False,
+            widget=forms.PasswordInput(
+                attrs={
+                    "autocomplete": "new-password",
+                    "class": "input input-bordered",
+                    "placeholder": "Парола",
+                }
+            ),
+        )
+        self.fields["password2"] = forms.CharField(
+            strip=False,
+            widget=forms.PasswordInput(
+                attrs={
+                    "autocomplete": "new-password",
+                    "class": "input input-bordered",
+                    "placeholder": "Повтори паролата",
+                }
+            ),
         )

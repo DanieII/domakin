@@ -1,0 +1,11 @@
+<form class="form-control gap-4"
+      hx-post="{% url 'create_task' %}"
+      hx-target="#tasks">
+    {% csrf_token %}
+    {% include "common/form.html" with form=form %}
+    <button class="btn btn-primary">Изпрати</button>
+    <button class="btn btn-secondary"
+            hx-get="{% url "tasks" %}"
+            hx-target="#tasks"
+            hx-swap="innerHTML">Върни се</button>
+</form>
