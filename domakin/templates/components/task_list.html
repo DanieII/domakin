@@ -1,0 +1,54 @@
+<div class="flex flex-col" id="tasks">
+    <div class="flex flex-col gap-2 mb-4">
+        {% for task in tasks %}
+            {% if task.is_completed %}
+                <div class="flex items-center justify-between border-2 border-success p-2 rounded-md">
+                    <p class="line-through">{{ task }}</p>
+                    <button class="btn btn-circle btn-disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke-width="1.5"
+                             stroke="currentColor"
+                             class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                        </svg>
+                    </button>
+                </div>
+            {% else %}
+                <div class="flex items-center justify-between border-2 border-accent p-2 rounded-md">
+                    <p>{{ task }}</p>
+                    <form method="post"
+                          hx-post="{% url 'complete_task' pk=task.pk %}"
+                          hx-target="#tasks"
+                          hx-swap="innerHTML">
+                        {% csrf_token %}
+                        <button class="btn btn-accent btn-circle" type="submit">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.5"
+                                 stroke="currentColor"
+                                 class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <button class="btn btn-circle btn-primary mx-auto"
+            hx-get="{% url "create_task" %}"
+            hx-target="#tasks"
+            hx-swap="innerHTML">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke-width="1.5"
+             stroke="currentColor"
+             class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+    </button>
+</div>

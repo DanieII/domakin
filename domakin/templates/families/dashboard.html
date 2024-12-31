@@ -7,7 +7,7 @@
         <h1 class="text-3xl text-center font-bold mb-6">Семейство {{ family.name }}</h1>
         <div class="bg-base-200 px-6 py-8 rounded-md flex flex-col mb-6">
             <h2 class="text-2xl font-bold text-center mb-4">Членове на семейството</h2>
-            <div class="grid grid-cols-2 gap-4 mb-2">
+            <div class="grid grid-cols-2 gap-4 mb-4">
                 {% for member in family.familymember_set.all %}<p class="text-lg text-center font-bold">{{ member }}</p>{% endfor %}
             </div>
             <button class="btn btn-square btn-primary ml-auto btn-md"
@@ -16,14 +16,12 @@
                     hx-target="#family_invitation"
                     hx-swap="innerHTML">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                     class="h-6 w-6"
                      fill="none"
                      viewBox="0 0 24 24"
-                     strokeWidth
-                     2
+                     stroke-width="1.5"
                      stroke="currentColor"
-                     className="size-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+                     class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
                 </svg>
             </button>
             <dialog id="family_invitation_modal"

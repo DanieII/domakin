@@ -1,5 +1,4 @@
-from django.shortcuts import redirect
-from django.urls import reverse
+from django.shortcuts import redirect, reverse
 from django.views.generic import View
 
 

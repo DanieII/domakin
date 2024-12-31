@@ -51,6 +51,9 @@ class CustomRegisterForm(SignupForm):
             ),
         )
 
+    def clean_name(self):
+        return self.cleaned_data["name"].title()
+
 
 class CustomLoginForm(LoginForm):
 
