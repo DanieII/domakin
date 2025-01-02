@@ -1,10 +1,17 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, reverse
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView
+from common.decorators import family_required
 from .models import Family, FamilyInvitation, FamilyMember
 from django.contrib.auth.mixins import LoginRequiredMixin
-from common.mixins import FamilyRequiredMixin, NotInFamilyRequiredMixin
+from common.mixins import NotInFamilyRequiredMixin
+
+
+@login_required
+@family_required
+def dashboard_view(request):
+    return render(request, "families/dashboard.html")
 
 
 class FamilyCreateView(LoginRequiredMixin, NotInFamilyRequiredMixin, CreateView):
@@ -31,17 +38,6 @@ class FamilyCreateView(LoginRequiredMixin, NotInFamilyRequiredMixin, CreateView)
         )
 
         return redirect(self.get_success_url())
-
-
-class FamilyDetailView(LoginRequiredMixin, FamilyRequiredMixin, DetailView):
-    model = Family
-    template_name = "families/dashboard.html"
-    context_object_name = "family"
-
-    def get_object(self, queryset=None):
-        user_family = self.request.user.familymember.family
-
-        return user_family
 
 
 @login_required

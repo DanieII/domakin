@@ -22,6 +22,9 @@ class FamilyMember(models.Model):
     def __str__(self):
         return self.user.name
 
+    def completed_tasks_count(self):
+        return self.family.task_set.filter(completed_by=self).count()
+
 
 class FamilyInvitation(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

@@ -1,4 +1,4 @@
-<div class="flex flex-col" id="tasks">
+<div id="tasks" class="flex flex-col">
     <div class="flex flex-col gap-2 mb-4">
         {% for task in tasks %}
             {% if task.is_completed %}
@@ -18,28 +18,26 @@
             {% else %}
                 <div class="flex items-center justify-between border-2 border-accent p-2 rounded-md">
                     <p>{{ task }}</p>
-                    <form method="post"
-                          hx-post="{% url 'complete_task' pk=task.pk %}"
-                          hx-target="#tasks"
-                          hx-swap="innerHTML">
-                        {% csrf_token %}
-                        <button class="btn btn-accent btn-circle" type="submit">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                 fill="none"
-                                 viewBox="0 0 24 24"
-                                 stroke-width="1.5"
-                                 stroke="currentColor"
-                                 class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                            </svg>
-                        </button>
-                    </form>
+                    <button class="btn btn-accent btn-circle"
+                            type="submit"
+                            hx-post="{% url 'complete_task' pk=task.pk %}"
+                            hx-target="#tasks"
+                            hx-swap="innerHTML">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke-width="1.5"
+                             stroke="currentColor"
+                             class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                        </svg>
+                    </button>
                 </div>
             {% endif %}
         {% endfor %}
     </div>
     <button class="btn btn-circle btn-primary mx-auto"
-            hx-get="{% url "create_task" %}"
+            hx-get="{% url 'create_task' %}"
             hx-target="#tasks"
             hx-swap="innerHTML">
         <svg xmlns="http://www.w3.org/2000/svg"
@@ -51,4 +49,23 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
         </svg>
     </button>
+</div>
+<div id="family_members"
+     class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"
+     hx-swap="outerHTML"
+     hx-swap-oob="true">
+    {% for member in user_family.familymember_set.all %}
+        <div class="stats shadow">
+            <div class="stat">
+                <div class="stat-title">
+                    <p class="text-lg font-bold">{{ member }}</p>
+                </div>
+                <div class="stat-value">
+                    <p class="text-lg">Завършени задачи: {{ member.completed_tasks_count }}</p>
+                </div>
+                <div class="stat-desc"></div>
+            </div>
+        </div>
+        <div class="text-center "></div>
+    {% endfor %}
 </div>

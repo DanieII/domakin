@@ -7,16 +7,10 @@ from common.mixins import FamilyRequiredMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class TaskListView(ListView):
-    model = Task
-    template_name = "components/task_list.html"
-    context_object_name = "tasks"
+def tasks_view(request):
+    tasks = Task.objects.filter(family=request.user.familymember.family)
 
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        queryset = queryset.filter(family=self.request.user.familymember.family)
-
-        return queryset
+    return render(request, "components/task_list.html", {"tasks": tasks})
 
 
 class TaskCreateView(LoginRequiredMixin, FamilyRequiredMixin, CreateView):
@@ -60,6 +54,7 @@ def task_complete_view(request, pk):
 
     if task and task.family == request.user.familymember.family:
         task.is_completed = True
+        task.completed_by = request.user.familymember
         task.save()
 
     tasks = Task.objects.filter(family=request.user.familymember.family)

@@ -4,11 +4,12 @@
 {% endblock title %}
 {% block content %}
     <div class="container mx-auto p-2">
-        <h1 class="text-3xl text-center font-bold mb-6">Семейство {{ family.name }}</h1>
+        <h1 class="text-3xl text-center font-bold mb-6">Семейство {{ user_family.name }}</h1>
         <div class="bg-base-200 px-6 py-8 rounded-md flex flex-col mb-6">
             <h2 class="text-2xl font-bold text-center mb-4">Членове на семейството</h2>
-            <div class="grid grid-cols-2 gap-4 mb-4">
-                {% for member in family.familymember_set.all %}<p class="text-lg text-center font-bold">{{ member }}</p>{% endfor %}
+            <!--Family members html comes from hx-swap-oob in task_list-->
+            <div id="family_members">
+                <span class="loading loading-spinner loading-lg"></span>
             </div>
             <button class="btn btn-square btn-primary ml-auto btn-md"
                     onclick="family_invitation_modal.showModal()"

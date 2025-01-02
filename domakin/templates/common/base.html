@@ -16,7 +16,7 @@
             <script src="{% static "js/htmx.min.js" %}" defer></script>
         {% endcompress %}
     </head>
-    <body>
+    <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
         {% include "common/navigation.html" %}
         <main>
             {% block content %}
