@@ -12,4 +12,4 @@ RUN apt-get update && apt-get install -y nodejs npm
 
 COPY . .
 
-ENTRYPOINT ["sh", "runserver.sh"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

@@ -210,3 +210,7 @@ ACCOUNT_ADAPTER = "users.adapters.CustomAccountAdapter"
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 EMAIL_FILE_PATH = BASE_DIR / "emails"
+
+
+# Celery
+CELERY_BROKER_URL = "redis://redis:6379/0"

@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render, reverse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from common.decorators import family_required
+from families.tasks import reset_family_tasks
 from .models import Family, FamilyInvitation, FamilyMember
 from django.contrib.auth.mixins import LoginRequiredMixin
 from common.mixins import NotInFamilyRequiredMixin
