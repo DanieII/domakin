@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from celery.schedules import crontab
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -213,4 +215,13 @@ EMAIL_FILE_PATH = BASE_DIR / "emails"
 
 
 # Celery
-CELERY_BROKER_URL = "redis://redis:6379/0"
+CELERY_BROKER_URL = "redis://redis:6379"
+
+CELERY_RESULT_BACKEND = "redis://redis:6379"
+
+CELERY_BEAT_SCHEDULE = {
+    "sample_task": {
+        "task": "families.tasks.task",
+        "schedule": crontab(minute="*/1"),
+    },
+}
