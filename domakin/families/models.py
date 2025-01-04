@@ -18,6 +18,7 @@ class Family(models.Model):
 class FamilyMember(models.Model):
     user = models.OneToOneField(UserModel, on_delete=models.CASCADE)
     family = models.ForeignKey(Family, on_delete=models.CASCADE)
+    wins = models.PositiveIntegerField(default=0)
     is_admin = models.BooleanField(default=False)
 
     def __str__(self):

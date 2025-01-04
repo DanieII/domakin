@@ -221,7 +221,7 @@ CELERY_RESULT_BACKEND = "redis://redis:6379"
 
 CELERY_BEAT_SCHEDULE = {
     "sample_task": {
-        "task": "families.tasks.task",
-        "schedule": crontab(minute="*/1"),
+        "task": "families.tasks.weekly_reset",
+        "schedule": crontab(hour="0", minute="0", day_of_week="1"),
     },
 }

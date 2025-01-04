@@ -17,7 +17,10 @@
                 </div>
             {% else %}
                 <div class="flex items-center justify-between border-2 border-accent p-2 rounded-md">
-                    <p>{{ task }}</p>
+                    <div>
+                        <p>{{ task }}</p>
+                        {% if task.description %}<p>{{ task.description }}</p>{% endif %}
+                    </div>
                     <button class="btn btn-accent btn-circle"
                             type="submit"
                             hx-post="{% url 'complete_task' pk=task.pk %}"
@@ -61,7 +64,10 @@
                     <p class="text-lg font-bold text-base-content">{{ member }}</p>
                 </div>
                 <div class="stat-value">
-                    <p class="text-lg">Завършени задачи: {{ member.completed_tasks_count }}</p>
+                    <p class="text-lg">Задачи за седмицата: {{ member.completed_tasks_count }}</p>
+                </div>
+                <div class="stat-value">
+                    <p class="text-lg">Спечелени седмици: {{ member.wins }}</p>
                 </div>
                 <div class="stat-desc"></div>
             </div>
